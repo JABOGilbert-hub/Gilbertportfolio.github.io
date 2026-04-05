@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes" />
+  <title>JABO Gilbert | UI/UX Designer Portfolio</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* ---------- GLOBAL RESETS & BASE ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* UNIFIED BACKGROUND */
+    body {
+      font-family: 'Inter', Arial, Helvetica, sans-serif;
+      background: #8b8be8;
+      background: linear-gradient(135deg, #8b8be8 0%, #6c6cd9 100%);
+      color: #fff;
+      transition: 0.3s;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    body.dark {
+      background: #0a0a1a;
+      background: linear-gradient(135deg, #12122a 0%, #1a1a3a 100%);
+      color: #eee;
+    }
+
+    /* topbar */
+    .topbar {
+      background: rgba(18, 18, 24, 0.85);
+      backdrop-filter: blur(8px);
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      position: relative;
+      z-index: 1001;
+    }
+    body.dark .topbar {
+      background: rgba(8, 8, 16, 0.9);
+    }
+
+    .socials {
+      display: flex;
+      gap: 14px;
+    }
+
+    .icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #ff1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .icon:hover {
+      background: #ff5a5a;
+      transform: scale(1.1);
+    }
+
+    .cta-area {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .btn {
+      background: #ff1a1a;
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-block;
+      transition: 0.2s;
+    }
+    .btn:hover {
+      background: #ff5a5a;
+      transform: scale(1.02);
+    }
+
+    .menu {
+      font-size: 30px;
+      cursor: pointer;
+      user-select: none;
+      transition: 0.2s;
+    }
+    .menu:hover {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+
+    /* DESKTOP NAVIGATION (default) */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 34px;
+      padding: 26px 20px;
+      border-bottom: 1px solid rgba(255,255,255,.2);
+      background: rgba(139, 139, 232, 0.7);
+      backdrop-filter: blur(4px);
+      transition: all 0.3s ease;
+    }
+    body.dark nav {
+      background: rgba(10, 10, 26, 0.8);
+      border-bottom-color: rgba(255,255,255,0.1);
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      transition: 0.2s;
+      font-size: 1rem;
+    }
+    nav a:hover {
+      color: #ff5a5a;
+    }
+
+    /* MOBILE NAVIGATION - hidden by default on desktop, shown via hamburger */
+    .mobile-nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(18, 18, 24, 0.98);
+      backdrop-filter: blur(20px);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+      z-index: 2000;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      display: flex;
+    }
+    .mobile-nav-overlay.active {
+      transform: translateX(0);
+    }
+    .mobile-nav-overlay a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.8rem;
+      font-weight: 700;
+      padding: 12px 24px;
+      transition: 0.2s;
+      text-align: center;
+    }
+    .mobile-nav-overlay a:hover {
+      color: #ff5a5a;
+      transform: scale(1.05);
+      background: rgba(255,255,255,0.1);
+      border-radius: 50px;
+    }
+    .close-menu-btn {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      font-size: 2.5rem;
+      cursor: pointer;
+      color: white;
+      background: rgba(255,255,255,0.1);
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+    }
+    .close-menu-btn:hover {
+      background: #ff1a1a;
+      transform: rotate(90deg);
+    }
+
+    /* Hide desktop nav on mobile, show hamburger menu trigger */
+    @media (max-width: 900px) {
+      nav {
+        display: none;
+      }
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 1002;
+      }
+    }
+
+    /* Hero section */
+    .hero {
+      min-height: calc(100vh - 140px);
+      display: flex;
+      align-items: center;
+      padding: 60px 8%;
+      position: relative;
+      overflow: hidden;
+      background: transparent;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 20px;
+      border-radius: 50px;
+      background: rgba(255,255,255,.06);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 620px;
+      margin-left: auto;
+    }
+    .welcome {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+    .dot {
+      width: 18px;
+      height: 18px;
+      background: #ff1a1a;
+      border-radius: 50%;
+    }
+    h1 {
+      font-size: 64px;
+      line-height: 1.05;
+      margin-bottom: 18px;
+    }
+    h1 span {
+      color: #ff5a3d;
+    }
+    .subtitle {
+      font-size: 24px;
+      display: block;
+    }
+    .hero p {
+      font-size: 22px;
+      line-height: 1.5;
+      color: #f3f3f3;
+      margin-bottom: 28px;
+    }
+    .stats {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+    .avatars {
+      display: flex;
+    }
+    .avatars img {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      margin-left: -12px;
+    }
+    .avatars img:first-child {
+      margin-left: 0;
+    }
+    .stat-text strong {
+      font-size: 42px;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .secondary {
+      background: #fff;
+      color: #111;
+    }
+    .secondary:hover {
+      background: #eee;
+    }
+    .bg-image {
+      position: absolute;
+      left: 5%;
+      bottom: 0;
+      width: 38%;
+      max-width: 420px;
+      opacity: .35;
+      border-radius: 30px;
+    }
+    @media (max-width: 900px) {
+      .hero {
+        padding: 40px 6%;
+      }
+      .bg-image {
+        display: none;
+      }
+      .hero-content {
+        margin: 0;
+        max-width: 100%;
+      }
+      h1 {
+        font-size: 46px;
+      }
+      .hero p {
+        font-size: 18px;
+      }
+    }
+
+    /* About section */
+    .about {
+      padding: 80px 8%;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 40px;
+      align-items: start;
+      background: rgba(0,0,0,0.08);
+      backdrop-filter: brightness(0.98);
+      border-radius: 48px;
+      margin: 20px 4%;
+    }
+    body.dark .about {
+      background: rgba(255,255,255,0.05);
+    }
+    .photo-box {
+      background: #d9d9d9;
+      border: 3px solid #ff5a3d;
+      border-radius: 32px;
+      min-height: 580px;
+      overflow: hidden;
+    }
+    .photo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .about h2 {
+      font-size: 48px;
+      margin-bottom: 24px;
+    }
+    .accent {
+      color: #ff5a3d;
+    }
+    .desc {
+      font-size: 20px;
+      font-weight: 600;
+      max-width: 760px;
+      line-height: 1.4;
+    }
+    .about h3 {
+      font-size: 56px;
+      line-height: 1.1;
+      margin: 34px 0 18px;
+    }
+    .story-img {
+      width: 100%;
+      max-width: 760px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 24px;
+      margin-bottom: 26px;
+    }
+    .skills {
+      font-size: 20px;
+    }
+    .ux {
+      color: #ffd966;
+    }
+    .graphic {
+      color: #ff5a3d;
+    }
+    .about .btn {
+      margin-top: 28px;
+      display: inline-block;
+      background: #ff5a3d;
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 18px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    @media (max-width: 900px) {
+      .about {
+        grid-template-columns: 1fr;
+        padding: 50px 6%;
+      }
+      .about h3 {
+        font-size: 40px;
+      }
+    }
+
+    /* PROJECTS section */
+    .projects-wrapper {
+      background: rgba(0,0,0,0.06);
+      font-family: 'Inter', sans-serif;
+      color: #ffffff;
+      padding: 2rem 1.5rem;
+      border-radius: 48px;
+      margin: 20px 4%;
+    }
+    body.dark .projects-wrapper {
+      background: rgba(255,255,255,0.04);
+    }
+    .projects-container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .projects-header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffffff, #ffd9b5);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+    }
+    .subhead {
+      font-size: 1.1rem;
+      color: #ffefdb;
+      border-left: 4px solid #ffb347;
+      padding-left: 1rem;
+    }
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin: 2rem 0 2rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      padding-bottom: 1.2rem;
+    }
+    .filter-btn {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 0.5rem 1.25rem;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: white;
+      font-family: inherit;
+    }
+    .filter-btn:hover {
+      background: #ff5a3d;
+      border-color: #ff5a3d;
+    }
+    .filter-btn.active {
+      background: #ff1a1a;
+      border-color: #ff1a1a;
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+    .project-card {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(4px);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: transform 0.2s;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      background: rgba(255,255,255,0.15);
+    }
+    .card-image {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding: 0.8rem;
+    }
+    .badge-category {
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.25rem 0.9rem;
+      border-radius: 40px;
+    }
+    .card-content {
+      padding: 1.5rem;
+    }
+    .project-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .project-description {
+      color: #f0f0f0;
+      font-size: 0.9rem;
+      margin: 0.5rem 0;
+    }
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0.75rem 0;
+    }
+    .tech-tag {
+      background: rgba(0,0,0,0.4);
+      color: #ffefdb;
+      font-size: 0.7rem;
+      padding: 0.25rem 0.8rem;
+      border-radius: 30px;
+    }
+    .card-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .live-link, .github-link {
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+    }
+    .live-link {
+      background: #ff1a1a;
+      color: white;
+    }
+    .github-link {
+      background: rgba(255,255,255,0.2);
+      color: white;
+    }
+    .skills-section-extra {
+      margin-top: 4rem;
+      background: rgba(0,0,0,0.2);
+      border-radius: 32px;
+      padding: 2rem;
+      text-align: center;
+    }
+    hr {
+      margin: 2rem 0;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+    .projects-footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #ddd;
+    }
+
+    /* Skills visual */
+    .skills-visual {
+      background: transparent;
+      padding: 2rem 1.5rem;
+    }
+    .skills-container {
+      max-width: 1100px;
+      margin: auto;
+      background: rgba(0,0,0,0.2);
+      backdrop-filter: blur(4px);
+      border-radius: 2rem;
+      padding: 2rem;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .badge-light {
+      display: inline-flex;
+      gap: .5rem;
+      background: rgba(255,255,255,0.15);
+      padding: .35rem 1rem;
+      border-radius: 50px;
+      font-size: .75rem;
+      font-weight: 700;
+    }
+    .skills-container h2 {
+      font-size: 2rem;
+      color: #fff;
+    }
+    .two-col-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .category-title {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      font-weight: 700;
+      border-left: 4px solid #ffb347;
+      padding-left: .7rem;
+      margin-bottom: 1rem;
+    }
+    .skill-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: .9rem;
+      font-weight: 600;
+      color: #f5f5f5;
+    }
+    .progress-bar-bg {
+      background: rgba(0,0,0,0.4);
+      border-radius: 30px;
+      height: 8px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 30px;
+    }
+    .cat-ux .progress-fill { background: linear-gradient(90deg,#ff8c5a,#ffb347); }
+    .cat-ui .progress-fill { background: linear-gradient(90deg,#c084fc,#a855f7); }
+    .cat-tools .progress-fill { background: linear-gradient(90deg,#4ade80,#22c55e); }
+    .cat-motion .progress-fill { background: linear-gradient(90deg,#fbbf24,#f59e0b); }
+    .expertise-badge-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: 1rem;
+    }
+    .expertise-chip {
+      background: rgba(255,255,255,0.15);
+      border-radius: 30px;
+      padding: .25rem .8rem;
+      font-size: .72rem;
+    }
+    @media(max-width:780px){
+      .two-col-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Timeline */
+    .timeline-section {
+      background: transparent;
+      padding: 2rem;
+    }
+    .timeline-container {
+      max-width: 1000px;
+      margin: auto;
+    }
+    .exp-header .badge {
+      background: rgba(255,255,255,0.15);
+      color: #ffefdb;
+      padding: .25rem .8rem;
+      border-radius: 40px;
+      display: inline-block;
+    }
+    .exp-header h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: white;
+    }
+    .divider {
+      width: 60px;
+      height: 4px;
+      background: #ffb347;
+      margin: 1rem auto;
+    }
+    .timeline:before {
+      background: rgba(255,255,255,0.3);
+    }
+    .timeline-content {
+      background: rgba(0,0,0,0.25);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 1.2rem;
+    }
+    .role-title, .company, .description {
+      color: #fefefe;
+    }
+    .skill-chip {
+      background: rgba(255,255,255,0.15);
+      color: #ffefdb;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: .2rem .7rem;
+      border-radius: 20px;
+      font-size: .7rem;
+      margin-right: 6px;
+    }
+
+    /* TESTIMONIALS SECTION */
+    .testimonials-section {
+      background: transparent;
+      padding: 3rem 1.5rem;
+    }
+    .testimonials-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .testimonials-header h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+    .testimonials-header .sub {
+      color: #ffefdb;
+      margin-bottom: 2rem;
+    }
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+    .testimonial-card {
+      background: rgba(0,0,0,0.2);
+      backdrop-filter: blur(4px);
+      border-radius: 28px;
+      padding: 2rem 1.8rem;
+      text-align: left;
+      transition: transform 0.3s;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .testimonial-card:hover {
+      transform: translateY(-8px);
+      background: rgba(0,0,0,0.3);
+    }
+    .quote-icon {
+      font-size: 2.5rem;
+      color: #ffb347;
+      opacity: 0.6;
+      margin-bottom: 1rem;
+    }
+    .testimonial-text {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      color: #f5f5f5;
+    }
+    .client-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .client-avatar {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #ffb347;
+    }
+    .client-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .client-role {
+      font-size: 0.8rem;
+      color: #ffb347;
+    }
+    .stars {
+      color: #ffc107;
+      font-size: 0.8rem;
+      margin-top: 4px;
+    }
+
+    /* BLOG section */
+    .blog-section {
+      background: transparent;
+      padding: 2rem;
+    }
+    .blog-container {
+      max-width: 1200px;
+      margin: auto;
+      text-align: center;
+    }
+    .label {
+      font-size: .8rem;
+      letter-spacing: 2px;
+      background: rgba(255,255,255,0.15);
+      color: #ffefdb;
+      padding: 5px 12px;
+      border-radius: 20px;
+      display: inline-block;
+    }
+    .blog-container h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff, #ffd9b5);
+      -webkit-background-clip: text;
+      color: transparent;
+      margin: .5rem 0;
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .blog-card {
+      background: rgba(0,0,0,0.2);
+      backdrop-filter: blur(4px);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: .3s;
+      text-align: left;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .blog-card:hover { transform: translateY(-5px); background: rgba(0,0,0,0.3); }
+    .blog-img {
+      height: 180px;
+      background-size: cover;
+      position: relative;
+    }
+    .blog-date {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: #0008;
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: .75rem;
+    }
+    .blog-content {
+      padding: 1rem;
+    }
+    .cat {
+      font-size: .7rem;
+      color: #ffb347;
+      font-weight: 700;
+    }
+    .blog-title {
+      font-weight: 700;
+      margin: .4rem 0;
+      color: white;
+    }
+    .excerpt {
+      font-size: .85rem;
+      color: #ddd;
+      margin-bottom: 10px;
+    }
+    .read {
+      font-size: .8rem;
+      text-decoration: none;
+      color: #ffb347;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .news {
+      background: rgba(0,0,0,0.25);
+      padding: 1.5rem;
+      border-radius: 20px;
+      margin-top: 1rem;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    /* Contact form */
+    .contact-form-section {
+      background: transparent;
+      padding: 3rem 1.5rem;
+    }
+    .contact-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .contact-heading {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .contact-heading h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+    }
+    .contact-panel {
+      background: rgba(0,0,0,0.25);
+      backdrop-filter: blur(8px);
+      padding: 28px;
+      border-radius: 32px;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 260px;
+      gap: 24px;
+      align-items: start;
+    }
+    .message-wrap {
+      background: rgba(0,0,0,0.3);
+      padding: 18px;
+      border-radius: 20px;
+    }
+    .message-wrap .label {
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .message-area {
+      width: 100%;
+      min-height: 100px;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 15px;
+      resize: vertical;
+      outline: none;
+      font-family: inherit;
+    }
+    .message-content {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .contact-avatar {
+      width: 85px;
+      height: 85px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 3px solid rgba(255,255,255,0.8);
+    }
+    .fields-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .field {
+      background: rgba(0,0,0,0.3);
+      padding: 12px 14px;
+      border-radius: 16px;
+    }
+    .field .label {
+      font-size: 13px;
+      opacity: 0.8;
+      margin-bottom: 6px;
+    }
+    .field input {
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: white;
+      font-size: 15px;
+    }
+    .right-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-end;
+    }
+    .socials-row {
+      display: flex;
+      gap: 12px;
+    }
+    .social-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #ff1a1a;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+    .social-icon:hover {
+      background: #ff5a5a;
+      transform: translateY(-3px);
+    }
+    .info-box {
+      background: rgba(0,0,0,0.3);
+      border-radius: 16px;
+      padding: 12px;
+      width: 100%;
+      text-align: center;
+      font-size: 13px;
+    }
+    .send-btn {
+      background: #ff1a1a;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 40px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.1s linear;
+      width: 100%;
+      font-family: inherit;
+    }
+    .send-btn:active {
+      transform: translateY(2px);
+    }
+    @media (max-width: 880px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      .right-col {
+        align-items: stretch;
+      }
+      .socials-row {
+        justify-content: flex-start;
+      }
+    }
+
+    /* Footer */
+    .footer-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      background: transparent;
+      color: #fff;
+    }
+    .newsletter {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop') center/cover;
+      border-radius: 28px;
+      padding: 40px;
+      text-align: center;
+    }
+    .form {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .form input {
+      padding: 14px 18px;
+      border: none;
+      border-radius: 8px;
+      min-width: 280px;
+    }
+    .footer-main {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr 1fr;
+      gap: 30px;
+      padding: 50px 0;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .footer-main a {
+      color: #ccc;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    .footer-main a:hover {
+      color: #ff5a5a;
+      text-decoration: underline;
+    }
+    .socials-footer {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .socials-footer a {
+      width: 34px;
+      height: 34px;
+      background: #f25c05;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+    }
+    .socials-footer a:hover {
+      background: #ff1a1a;
+      transform: translateY(-3px);
+    }
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .list a {
+      display: inline-block;
+    }
+    .bottom {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 20px 0;
+      color: #aaa;
+      font-size: 14px;
+    }
+    .bottom-links a {
+      color: #ccc;
+      text-decoration: none;
+      margin-left: 20px;
+    }
+    .bottom-links a:hover {
+      color: #ff5a5a;
+    }
+    @media(max-width:900px){
+      .footer-main { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="socials">
+    <a href="https://facebook.com" target="_blank" class="icon"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://twitter.com" target="_blank" class="icon"><i class="fab fa-x-twitter"></i></a>
+    <a href="https://youtube.com" target="_blank" class="icon"><i class="fab fa-youtube"></i></a>
+    <a href="https://linkedin.com" target="_blank" class="icon"><i class="fab fa-linkedin-in"></i></a>
+    <a href="https://github.com" target="_blank" class="icon"><i class="fab fa-github"></i></a>
+  </div>
+  <div class="cta-area">
+    <a href="#contact-form-section" class="btn">GET IN TOUCH →</a>
+    <div class="menu" onclick="toggleMode()">🌙</div>
+    <div class="menu" onclick="toggleMobileMenu()" id="menuBtn">☰</div>
+  </div>
+</header>
+
+<!-- DESKTOP NAVIGATION (visible only on desktop) -->
+<nav id="desktopNav">
+  <a href="#home">HOME</a>
+  <a href="#about">ABOUT</a>
+  <a href="#projects">PROJECT</a>
+  <a href="#skills-visual">SKILLS</a>
+  <a href="#testimonials">TESTIMONIALS</a>
+  <a href="#blog">BLOG</a>
+  <a href="#timeline">TIMELINE</a>
+  <a href="#contact-form-section">CONTACT</a>
+</nav>
+
+<!-- MOBILE OVERLAY MENU (hidden by default, triggered by hamburger) -->
+<div id="mobileMenuOverlay" class="mobile-nav-overlay">
+  <div class="close-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-times"></i></div>
+  <a href="#home" onclick="closeMobileMenu()">HOME</a>
+  <a href="#about" onclick="closeMobileMenu()">ABOUT</a>
+  <a href="#projects" onclick="closeMobileMenu()">PROJECT</a>
+  <a href="#skills-visual" onclick="closeMobileMenu()">SKILLS</a>
+  <a href="#testimonials" onclick="closeMobileMenu()">TESTIMONIALS</a>
+  <a href="#blog" onclick="closeMobileMenu()">BLOG</a>
+  <a href="#timeline" onclick="closeMobileMenu()">TIMELINE</a>
+  <a href="#contact-form-section" onclick="closeMobileMenu()">CONTACT</a>
+</div>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <img class="bg-image" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop" alt="designer" />
+  <div class="hero-content">
+    <div class="welcome"><span class="dot"></span>WELCOME TO MY PORTFOLIO</div>
+    <h1>Hi I`M <span>CYUBAHIRO JABO Gilbert</span><br><span class="subtitle">UI/UX Designer</span></h1>
+    <p>I create meaningful UI/UX designs that blend creativity with usability. Focused on delivering experiences that users love and businesses trust.</p>
+    <div class="stats"><div class="avatars"><img src="https://randomuser.me/api/portraits/women/44.jpg"><img src="https://randomuser.me/api/portraits/men/32.jpg"><img src="https://randomuser.me/api/portraits/men/75.jpg"></div><div class="stat-text"><strong>20K+</strong><br>Happy Customers</div></div>
+    <div class="hero-buttons"><a href="#contact-form-section" class="btn">GET IN TOUCH →</a><a href="#projects" class="btn secondary">PORTFOLIO →</a></div>
+  </div>
+</section>
+
+<!-- ABOUT - Download CV button with working Google Drive direct link -->
+<section id="about" class="about"><div class="photo-box"><img src="profile.jpeg.jpeg" alt="My Profile photo"></div><div><h2>About <span class="accent">Me</span></h2><p class="desc">Creative UI/UX Designer with a passion for crafting intuitive, responsive, and visually engaging digital experiences. Skilled in turning complex ideas into clean user-centered designs that improve usability and brand identity.</p><h3>The Story Behind My<br>Design <span class="accent" style="font-size:28px;">READ MORE</span></h3><img class="story-img" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop" alt="Story image"><p class="skills">Key Skills: UI & <span class="ux">UX Design</span> | JavaScript | Python | <span class="graphic">Graphic</span> Design</p>
+<!-- >>> DOWNLOAD CV BUTTON WITH WORKING GOOGLE DRIVE DIRECT LINK <<< -->
+<a href="https://drive.google.com/uc?export=download&id=1NWuTt1V5LFEWrR5_YrKJw3FPN2ZiICp2" download="CYUBAHIRO_JABO_Gilbert_CV.pdf" class="btn">Download CV</a>
+</div></section>
+
+<!-- PROJECTS -->
+<div id="projects" class="projects-wrapper"><div class="projects-container">
+  <div class="projects-header"><h1>My Projects</h1>
+    <div class="subhead">Creative direction • Development • UI/UX • Real-world impact</div>
+  </div><div class="filter-bar"><button class="filter-btn active" data-filter="all">All Projects</button>
+    <button class="filter-btn" data-filter="graphic">Graphic Design</button>
+    <button class="filter-btn" data-filter="web">Web Dev</button>
+    <button class="filter-btn" data-filter="uiux">UI/UX Design</button>
+  </div><div class="projects-grid" id="projectsContainer"></div><div class="skills-section-extra">
+    <h4>These are the projects I worked on</h4></div><hr />
+    <div class="projects-footer">✨ Real projects — click "Live Site" to explore each live demo / external link</div></div></div>
+
+<!-- SKILLS -->
+<div id="skills-visual" class="skills-visual">
+  <div class="skills-container"><div class="section-header">
+    <div class="badge-light"><i class="fas fa-gem"></i> UI/UX design mastery</div>
+    <h2>Skills & design fluency</h2></div><div class="two-col-grid"><div><div class="skills-category cat-ux">
+      <div class="category-title"><i class="fas fa-users"></i>UX Research & Strategy</div>
+      <div class="skill-item"><div class="skill-meta"><span>User Interviews</span>
+      <span>92%</span></div><div class="progress-bar-bg"><div class="progress-fill" style="width:92%">
+
+      </div></div></div><div class="skill-item"><div class="skill-meta"><span>Journey Mapping</span><span>88%</span></div><div class="progress-bar-bg"><div class="progress-fill" style="width:88%"></div></div></div></div><div class="skills-category cat-ui"><div class="category-title"><i class="fas fa-palette"></i>UI & Visual Design</div><div class="skill-item"><div class="skill-meta"><span>High-fidelity UI</span><span>95%</span></div><div class="progress-bar-bg"><div class="progress-fill" style="width:95%"></div></div></div></div></div><div><div class="skills-category cat-tools"><div class="category-title"><i class="fas fa-toolbox"></i>Design Tools</div><div class="skill-item"><div class="skill-meta"><span>Figma</span><span>98%</span></div><div class="progress-bar-bg"><div class="progress-fill" style="width:98%"></div></div></div></div><div class="skills-category cat-motion"><div class="category-title"><i class="fas fa-hand-pointer"></i>Prototyping</div><div class="skill-item"><div class="skill-meta"><span>Prototypes</span><span>93%</span></div><div class="progress-bar-bg"><div class="progress-fill" style="width:93%"></div></div></div></div></div></div><div class="expertise-badge-grid"><span class="expertise-chip">HTML/CSS</span><span class="expertise-chip">Dev handoff</span></div></div></div>
+
+<!-- EXPERIENCE/TIMELINE -->
+<div id="timeline" class="timeline-section"><div class="timeline-container">
+  <div class="exp-header"><div class="badge"><i class="fas fa-briefcase">
+  </i> Journey & Expertise</div><h1>My work Experience</h1><div class="divider">
+  </div></div><div class="timeline"><div class="timeline-item"><div class="timeline-left">
+    <div class="timeline-dot"><span>2025<br>PRESENT</span></div></div>
+    <div class="timeline-content"><div class="role-title">UI/UX DESIGNER & GRAPHIC DESIGNER</div>
+    <div class="company">Freelencer · Part time</div><div class="description">Bridging UI/UX designs into production-ready components.</div>
+  </div></div><div class="timeline-item"><div class="timeline-left"><div class="timeline-dot">
+    <span><br>January 2025 – September 2025</span></div></div><div class="timeline-content">
+      <div class="role-title">WEB DEVELOPER – GRAPHIC DESIGNER</div><div class="company">Rutsiro Tea Factory · Creative Lead</div><div class="description">Designed company`s website,flyers and posters.</div></div></div>
+      <div class="timeline-item"><div class="timeline-left"><div class="timeline-dot">
+        <span><br>January 2024 - October 2024</span></div></div><div class="timeline-content">
+          <div class="role-title">GRAPHIC DESIGNER</div><div class="company">Dmall Hotel</div><div class="description">Specialized Graphic Design Tools such as Photoshop, Figma,Canva and Adobe Illustrator.</div></div></div></div></div></div>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="testimonials-section">
+  <div class="testimonials-container">
+    <div class="testimonials-header">
+      <div class="label"><i class="fas fa-comment-dots"></i> Client Love</div>
+      <h2>What Clients Say</h2>
+      <div class="divider" style="margin:10px auto"></div>
+      <p class="sub">Real feedback from people I've worked with</p>
+    </div>
+    <div class="testimonial-grid" id="testimonialGrid"></div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<div id="blog" class="blog-section"><div class="blog-container"><div class="label">BLOG & POST</div><h1>Latest News From Insight</h1><div class="divider" style="margin:10px auto"></div><p class="sub">UI/UX design insights & trends</p><div class="blog-grid" id="blogGrid"></div><div class="news"><div><h3><i class="fas fa-paintbrush"></i> Stay ahead in UI/UX</h3><p>Get weekly insights & case studies.</p></div><a href="#" style="background:#ff1a1a; color:#fff; padding:8px 15px; border-radius:20px; text-decoration:none">Subscribe</a></div><footer style="margin-top:2rem; font-size:.8rem; color:#aaa">UI/UX trends & strategy</footer></div></div>
+
+<!-- CONTACT FORM -->
+<section id="contact-form-section" class="contact-form-section">
+  <div class="contact-wrapper"><div class="contact-heading"><h2>Send Me a Message</h2><p>Let's collaborate — I'll get back to you within 24h</p></div>
+  <div class="contact-panel"><div class="contact-grid"><div class="message-wrap"><label class="label">Message</label><div class="message-content"><textarea id="contactMessage" class="message-area" placeholder="Write your message..." rows="4"></textarea><img src="https://i.imgur.com/O6aXo8K.png" alt="avatar" class="contact-avatar"></div></div>
+  <div class="fields-col"><div class="field"><label class="label">Your Name</label><input id="contactName" type="text" placeholder="Full name"></div><div class="field"><label class="label">Your Email</label><input id="contactEmail" type="email" placeholder="email@example.com"></div></div>
+  <div class="right-col"><div class="socials-row"><div class="social-icon"><i class="fab fa-facebook-f"></i></div><div class="social-icon"><i class="fab fa-x-twitter"></i></div><div class="social-icon"><i class="fa-solid fa-envelope"></i></div><div class="social-icon"><i class="fa-brands fa-whatsapp"></i></div></div><div class="info-box"> <br></div><button id="contactSendBtn" class="send-btn">Send Message →</button></div></div></div></div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer-wrap"><section class="newsletter"><h2>Subscribe To My Newsletter</h2><p>Get UI/UX design updates, portfolio projects, web design ideas, and creative insights from JABO Gilbert.</p><div class="form"><input type="email" placeholder="Your email" /><a href="#" class="btn">SUBMIT NOW →</a></div></section><footer><div class="footer-main"><div><h3>JABO Gilbert</h3><p>Creative UI/UX Designer and web developer focused on building modern, user-friendly digital experiences.</p><div class="socials-footer"><a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a><a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a><a href="https://twitter.com" target="_blank"><i class="fab fa-x-twitter"></i></a></div></div><div><h3>Pages</h3><div class="list"><a href="#home">Home</a><a href="#about">About Us</a><a href="#projects">Projects</a><a href="#testimonials">Testimonials</a><a href="#blog">Blog & News</a></div></div><div><h3>Services</h3><div class="list"><a href="#contact-form-section">Web Design & Development</a><a href="#contact-form-section">UI/UX & Branding</a><a href="#contact-form-section">Digital Marketing</a></div></div><div><h3>Contact Us</h3><div class="list"><a href="mailto:jabogilbe@gmail.com"><i class="fas fa-envelope"></i> jabogilbe@gmail.com</a><a href="tel:+250791820116"><i class="fas fa-phone"></i> +250 791820116</a><a href="https://maps.google.com/?q=Kigali+Rwanda" target="_blank"><i class="fas fa-location-dot"></i> Kigali, Rwanda</a></div></div></div><div class="bottom"><div>JABO Gilbert © 2026 All Rights Reserved.</div><div class="bottom-links"><a href="#">Terms & Conditions</a><a href="#">Privacy</a></div></div></footer></div>
+
+<script>
+  // Projects Data
+  const projectsData = [ { id: 1, title: "Rwanda World Food Forum", description: "Volunteering as UI/UX designer for an impactful global food systems youth summit.", image: "https://placehold.co/600x400/2A7A6E/FFFFFF?text=Rwanda+WFF", category: "uiux", tech: ["Figma","Research"], liveLink: "https://www.world-food-forum.org/", githubLink: "#" }, { id: 4, title: "MURIKA CREATIVE TALENT", description: "Participated in Murika Creative Talent to help creators build visibility.", image: "https://placehold.co/600x400/1E3F5A/FFFFFF?text=Murika", category: "web", tech: ["HTML","CSS","JS"], liveLink: "https://www.murika.rw/en/", githubLink: "#" }, { id: 8, title: "Shirt Printing & Merch", description: "Graphic design for streetwear and event merch.", image: "https://placehold.co/600x400/4A4E69/FFFFFF?text=Shirt+Printing", category: "graphic", tech: ["Illustrator","Photoshop"], liveLink: "https://www.printful.com/designs", githubLink: "#" } ];
+  function renderProjects(filter = "all") { const container = document.getElementById("projectsContainer"); if(!container) return; let filtered = filter === "all" ? projectsData : projectsData.filter(p => p.category === filter); if(filtered.length === 0) { container.innerHTML = `<div style="grid-column:1/-1; text-align:center;">No projects match</div>`; return; } container.innerHTML = filtered.map(p => `<div class="project-card"><div class="card-image" style="background-image:url('${p.image}');"><span class="badge-category">${p.category === 'uiux' ? 'UI/UX' : p.category === 'web' ? 'Web Dev' : 'Graphic'}</span></div><div class="card-content"><h3 class="project-title">${p.title}</h3><p class="project-description">${p.description}</p><div class="tech-tags">${p.tech.map(t => `<span class="tech-tag">${t}</span>`).join('')}</div><div class="card-links"><a href="${p.liveLink}" target="_blank" class="live-link">🔗 Live Site</a><a href="#" class="github-link">🐙 GitHub</a></div></div></div>`).join(''); }
+  function initFilters() { document.querySelectorAll(".filter-btn").forEach(btn => { btn.addEventListener("click", function() { document.querySelectorAll(".filter-btn").forEach(b=>b.classList.remove("active")); this.classList.add("active"); renderProjects(this.getAttribute("data-filter")); }); }); }
+  renderProjects("all"); initFilters();
+
+  // Testimonials Data
+  const testimonialsData = [
+    { name: "Sarah M.", role: "Product Manager", text: "JABO transformed our app's interface completely. The user engagement increased by 40% after his redesign. Incredible attention to detail!", avatar: "https://randomuser.me/api/portraits/women/68.jpg", stars: 5 },
+    { name: "David K.", role: "Startup Founder", text: "Working with Gilbert was a pleasure. He understood our vision and delivered a stunning UI/UX that our customers love. Highly recommended!", avatar: "https://randomuser.me/api/portraits/men/45.jpg", stars: 5 },
+    { name: "Aline U.", role: "Marketing Director", text: "Professional, creative, and always on time. The design system he built saved us countless hours. A true expert in his field.", avatar: "https://randomuser.me/api/portraits/women/33.jpg", stars: 5 }
+  ];
+  function renderTestimonials() {
+    const grid = document.getElementById("testimonialGrid");
+    if(!grid) return;
+    grid.innerHTML = testimonialsData.map(t => `
+      <div class="testimonial-card">
+        <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+        <p class="testimonial-text">"${t.text}"</p>
+        <div class="client-info">
+          <img src="${t.avatar}" alt="${t.name}" class="client-avatar">
+          <div>
+            <div class="client-name">${t.name}</div>
+            <div class="client-role">${t.role}</div>
+            <div class="stars">${'★'.repeat(t.stars)}${'☆'.repeat(5-t.stars)}</div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+  renderTestimonials();
+
+  // Blog Data
+  const posts = [["Online Presence 2026","UI/UX tactics to boost engagement.","17 Mar","UI/UX","https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=600"],["Voice Search UX","Voice UI shaping experience.","17 Mar","Voice UX","https://images.unsplash.com/photo-1546054454-aa26e2bebc6d?w=600"],["Inclusive Design","Accessibility best practices.","10 Mar","Accessibility","https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600"]];
+  const blogGrid = document.getElementById("blogGrid"); if(blogGrid) posts.forEach(p=>{ blogGrid.innerHTML += `<div class="blog-card"><div class="blog-img" style="background-image:url('${p[4]}')"><div class="blog-date">${p[2]}</div></div><div class="blog-content"><div class="cat">${p[3]}</div><div class="blog-title">${p[0]}</div><div class="excerpt">${p[1]}</div><a class="read">READ MORE →</a></div></div>`; });
+  if(blogGrid) blogGrid.onclick = e => { if(e.target.classList.contains("read")) { e.preventDefault(); alert("📖 Opening article..."); } };
+
+  // Contact Form Handler
+  const sendBtn = document.getElementById("contactSendBtn"); if(sendBtn) sendBtn.addEventListener("click", () => { let name=document.getElementById("contactName")?.value.trim(), email=document.getElementById("contactEmail")?.value.trim(), msg=document.getElementById("contactMessage")?.value.trim(); if(!name||!email||!msg) alert("Please fill all fields."); else { sendBtn.disabled=true; sendBtn.textContent="Sending..."; setTimeout(()=>{ sendBtn.disabled=false; sendBtn.textContent="Send Message →"; alert(`Thanks ${name}! Message sent (demo).`); if(document.getElementById("contactName")) document.getElementById("contactName").value=""; if(document.getElementById("contactEmail")) document.getElementById("contactEmail").value=""; if(document.getElementById("contactMessage")) document.getElementById("contactMessage").value=""; },800); } });
+  
+  // Improved Mobile Menu Functions
+  function toggleMobileMenu() {
+    const overlay = document.getElementById("mobileMenuOverlay");
+    const menuBtn = document.getElementById("menuBtn");
+    overlay.classList.toggle("active");
+    if(overlay.classList.contains("active")) {
+      menuBtn.innerHTML = "✖";
+      document.body.style.overflow = "hidden";
+    } else {
+      menuBtn.innerHTML = "☰";
+      document.body.style.overflow = "";
+    }
+  }
+  function closeMobileMenu() {
+    const overlay = document.getElementById("mobileMenuOverlay");
+    const menuBtn = document.getElementById("menuBtn");
+    if(overlay.classList.contains("active")) {
+      overlay.classList.remove("active");
+      menuBtn.innerHTML = "☰";
+      document.body.style.overflow = "";
+    }
+  }
+  
+  // Dark Mode Toggle
+  function toggleMode(){ document.body.classList.toggle("dark"); }
+  
+  // Close mobile menu when pressing escape key
+  document.addEventListener("keydown", function(e) {
+    if(e.key === "Escape") {
+      closeMobileMenu();
+    }
+  });
+</script>
+</body>
+</html>
